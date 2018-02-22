@@ -3,26 +3,30 @@ package es.salesianos.model;
 public class Videogame {
 
 	private String title;
-	private String recommendedage;
-	private String releasedate;
+	private String age;
+	private String reldate; 
+
 	public String getTitle() {
 		return title;
 	}
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getRecommendedage() {
-		return recommendedage;
-	}
-	public void setRecommendedage(String recommendedage) {
-		this.recommendedage = recommendedage;
-	}
-	public String getReleasedate() {
-		return releasedate;
-	}
-	public void setReleasedate(String releasedate) {
-		this.releasedate = releasedate;
-	} 
 
-	
+	public String getAge() {
+		return age;
+	}
+
+	public void setAge(String age) {
+		this.age = age;
+	}
+
+	public String getRelDate() {
+		return reldate;
+	}
+
+	public void setRelDate(String reldate) {
+		this.reldate = reldate;
+	}
 }

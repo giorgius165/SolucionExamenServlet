@@ -25,7 +25,7 @@ public class ConnectionH2 implements ConnectionConsole,ConnectionVideogame {
 		try {
 			preparedStatement = conn.prepareStatement(INSERTCONSOLE);
 			preparedStatement.setString(1, consoleForm.getName());
-			preparedStatement.setString(2, consoleForm.getEnterprise());
+			preparedStatement.setString(2, consoleForm.getCompany());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -42,8 +42,8 @@ public class ConnectionH2 implements ConnectionConsole,ConnectionVideogame {
 		try {
 			preparedStatement = conn.prepareStatement(INSERTVIDEOGAME);
 			preparedStatement.setString(1, videogameForm.getTitle());
-			preparedStatement.setString(2, videogameForm.getRecommendedage());
-			preparedStatement.setString(3, videogameForm.getReleasedate());
+			preparedStatement.setString(2, videogameForm.getAge());
+			preparedStatement.setString(3, videogameForm.getRelDate());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -67,7 +67,7 @@ public class ConnectionH2 implements ConnectionConsole,ConnectionVideogame {
 	}
 
 	public Optional<Console> search(Console console) {
-		Console actualConsole = null;
+		Console currentConsole = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		Connection conn = null;
@@ -78,9 +78,9 @@ public class ConnectionH2 implements ConnectionConsole,ConnectionVideogame {
 			resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
-				actualConsole = new Console();
-				actualConsole.setName(resultSet.getString("name"));
-				actualConsole.setEnterprise(resultSet.getString("enterprise"));
+				currentConsole = new Console();
+				currentConsole.setName(resultSet.getString("name"));
+				currentConsole.setCompany(resultSet.getString("company"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -88,7 +88,7 @@ public class ConnectionH2 implements ConnectionConsole,ConnectionVideogame {
 		} finally {
 			close(preparedStatement);
 		}
-		return Optional.ofNullable(actualConsole);
+		return Optional.ofNullable(currentConsole);
 	}
 
 	public void update(Console console) {
@@ -96,9 +96,9 @@ public class ConnectionH2 implements ConnectionConsole,ConnectionVideogame {
 		PreparedStatement preparedStatement = null;
 		try {
 			conn = open(JDBCURL);
-			preparedStatement = conn.prepareStatement("UPDATE console SET " + "name = ?, enterprise = ? WHERE name = ?");
+			preparedStatement = conn.prepareStatement("UPDATE console SET " + "name = ?, company = ? WHERE name = ?");
 			preparedStatement.setString(1, console.getName());
-			preparedStatement.setString(2, console.getEnterprise());
+			preparedStatement.setString(2, console.getCompany());
 			preparedStatement.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -118,10 +118,10 @@ public class ConnectionH2 implements ConnectionConsole,ConnectionVideogame {
 			statement = conn.createStatement();
 			resultSet = statement.executeQuery("SELECT * FROM console");
 			while (resultSet.next()) {
-				Console actualConsole = new Console();
-				actualConsole.setName(resultSet.getString("name"));
-				actualConsole.setEnterprise(resultSet.getString("enterprise"));
-				consoles.add(actualConsole);
+				Console currentConsole = new Console();
+				currentConsole.setName(resultSet.getString("name"));
+				currentConsole.setCompany(resultSet.getString("company"));
+				consoles.add(currentConsole);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -135,7 +135,7 @@ public class ConnectionH2 implements ConnectionConsole,ConnectionVideogame {
 
 	@Override
 	public Optional<Videogame> search(Videogame videogame) {
-		Videogame actualVideogame = null;
+		Videogame currentVideogame = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		Connection conn = null;
@@ -147,10 +147,10 @@ public class ConnectionH2 implements ConnectionConsole,ConnectionVideogame {
 			resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
-				actualVideogame = new Videogame();
-				actualVideogame.setTitle(resultSet.getString("title"));
-				actualVideogame.setRecommendedage(resultSet.getString("recommendedage"));
-				actualVideogame.setReleasedate(resultSet.getString("releasedate"));
+				currentVideogame = new Videogame();
+				currentVideogame.setTitle(resultSet.getString("title"));
+				currentVideogame.setAge(resultSet.getString("age"));
+				currentVideogame.setRelDate(resultSet.getString("reldate"));
 			}
 
 		} catch (Exception e) {
@@ -159,7 +159,7 @@ public class ConnectionH2 implements ConnectionConsole,ConnectionVideogame {
 		} finally {
 			close(preparedStatement);
 		}
-		return Optional.ofNullable(actualVideogame);
+		return Optional.ofNullable(currentVideogame);
 	}
 
 	@Override
@@ -170,10 +170,10 @@ public class ConnectionH2 implements ConnectionConsole,ConnectionVideogame {
 		try {
 
 			conn = open(JDBCURL);
-			preparedStatement = conn.prepareStatement("UPDATE videogame SET " + "title = ?, recommendedage = ?, releasedate=? WHERE title = ?");
+			preparedStatement = conn.prepareStatement("UPDATE videogame SET " + "title = ?, age = ?, reldate=? WHERE title = ?");
 			preparedStatement.setString(1, videogame.getTitle());
-			preparedStatement.setString(2, videogame.getRecommendedage());
-			preparedStatement.setString(3, videogame.getReleasedate());
+			preparedStatement.setString(2, videogame.getAge());
+			preparedStatement.setString(3, videogame.getRelDate());
 			preparedStatement.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -195,11 +195,11 @@ public class ConnectionH2 implements ConnectionConsole,ConnectionVideogame {
 			resultSet = statement.executeQuery("SELECT * FROM videogame");
 
 			while (resultSet.next()) {
-				Videogame thisVideogame = new Videogame();
-				thisVideogame.setTitle(resultSet.getString("title"));
-				thisVideogame.setRecommendedage(resultSet.getString("recommendedage"));
-				thisVideogame.setReleasedate(resultSet.getString("releasedate"));
-				videogames.add(thisVideogame);
+				Videogame currentVideogame = new Videogame();
+				currentVideogame.setTitle(resultSet.getString("title"));
+				currentVideogame.setAge(resultSet.getString("age"));
+				currentVideogame.setRelDate(resultSet.getString("reldate"));
+				videogames.add(currentVideogame);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -241,10 +241,10 @@ public class ConnectionH2 implements ConnectionConsole,ConnectionVideogame {
 			statement = conn.createStatement();
 			resultSet = statement.executeQuery("SELECT * FROM console order by name");
 			while (resultSet.next()) {
-				Console thisConsole = new Console();
-				thisConsole.setName(resultSet.getString("name"));
-				thisConsole.setEnterprise(resultSet.getString("enterprise"));
-				consoles.add(thisConsole);
+				Console currentConsole = new Console();
+				currentConsole.setName(resultSet.getString("name"));
+				currentConsole.setCompany(resultSet.getString("company"));
+				consoles.add(currentConsole);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

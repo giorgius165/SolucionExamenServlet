@@ -1,0 +1,83 @@
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_3_1.xsd"
+	version="3.1">
+	<display-name>Console-Videogame Example</display-name>
+
+	<servlet>
+		<servlet-name>ConsoleServlet</servlet-name>
+		<servlet-class>es.salesianos.servlet.ConsoleServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ConsoleServlet</servlet-name>
+		<url-pattern>/addConsole</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>VideogameServlet</servlet-name>
+		<servlet-class>es.salesianos.servlet.VideogameServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>VideogameServlet</servlet-name>
+		<url-pattern>/addVideogame</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ListConsoleServlet</servlet-name>
+		<servlet-class>es.salesianos.servlet.ListConsoleServlet
+		</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ListConsoleServlet</servlet-name>
+		<url-pattern>/updateConsoleList</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ListConsoleOrderServlet</servlet-name>
+		<servlet-class>es.salesianos.servlet.ListConsoleOrderServlet
+		</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ListConsoleOrderServlet</servlet-name>
+		<url-pattern>/updateConsoleOrder</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ConsoleDelete</servlet-name>
+		<servlet-class>es.salesianos.servlet.ConsoleDelete</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ConsoleDelete</servlet-name>
+		<url-pattern>/deleteConsole</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ListVideogamesServlet</servlet-name>
+		<servlet-class>es.salesianos.servlet.ListVideogamesServlet
+		</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ListVideogamesServlet</servlet-name>
+		<url-pattern>/updateVideogameList</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>VideogameDelete</servlet-name>
+		<servlet-class>es.salesianos.servlet.VideogameDelete</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>VideogameDelete</servlet-name>
+		<url-pattern>/deleteVideogame</url-pattern>
+	</servlet-mapping>
+
+	<welcome-file-list>
+		<welcome-file>AddVideojuego.jsp</welcome-file>
+	</welcome-file-list>
+
+</web-app>
